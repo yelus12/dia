@@ -97,7 +97,7 @@
 
         if (uid) { $('#uid').val(uid) }
         var tabledata = [
-            { id: 1, code: "", result: 0, response: '', description: '요청 전' },
+            { id: 1, code: "", mon: "", result: 0, response: '', description: '요청 전' },
             { id: 2, code: "", result: 0, response: '', description: '요청 전' },
             { id: 3, code: "", result: 0, response: '', description: '요청 전' },
             { id: 4, code: "", result: 0, response: '', description: '요청 전' },
@@ -151,7 +151,7 @@
         let str = "";
 	    
         for (var a in tabledata) {
-            str += `<tr id="tr_${tabledata[a].id}"><th scope = "row">${tabledata[a].id}</th><td>${tabledata[a].code}</td><td>${tabledata[a].be}</td><td>`;
+            str += `<tr id="tr_${tabledata[a].id}"><th scope = "row">${tabledata[a].id}</th><td>${tabledata[a].code}</td><td>${tabledata[a].mon}</td><td>`;
             str += `</td><td>${tabledata[a].response}</td><td>${tabledata[a].description}</td></tr >`;
         }    
 
