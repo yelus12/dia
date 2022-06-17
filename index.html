@@ -190,7 +190,7 @@
                         }
                         tabledata[i]['response'] = data['resultCode']
 
-                        let str = `<th scope = "row">${tabledata[i].id}</th><td>${tabledata[i].code}</td><td>${tabledata[i].be}</td><td>`;
+                        let str = `<th scope = "row">${tabledata[i].id}</th><td>${tabledata[i].code}</td><td>${tabledata[i].mon}</td><td>`;
                         
                         if (tabledata[i].result === 0) {
                             str += `<i class="fas fa-times"></i>`;
@@ -222,7 +222,7 @@
                     tabledata[i]['code'] = htmlData;
                     
 
-            		let str = `<th scope = "row">${tabledata[i].id}</th><td>${tabledata[i].code}</td><td>${tabledata[i].be}</td><td>`;
+            		let str = `<th scope = "row">${tabledata[i].id}</th><td>${tabledata[i].code}</td><td>${tabledata[i].mon}</td><td>`;
                         
                         if (tabledata[i].result === 0) {
                             str += `<i class="fas fa-times"></i>`;
