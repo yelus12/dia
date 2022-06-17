@@ -230,7 +230,18 @@
                     if (htmlDate != "") {
 						$('#datediv span').text(htmlDate + " : ~" + (i + 1) + " 추가");
                     }
-                    table.updateData(tabledata);
+			let str = `<th scope = "row">${tabledata[i].id}</th><td>${tabledata[i].code}</td><td>${tabledata[i].be}</td><td>`;
+
+			if (tabledata[i].result === 0) {
+			    str += `<i class="fas fa-times"></i>`;
+			} else {
+			    str += `<i class="fas fa-check"></i>`;
+			}    
+
+			str += `</td><td>${tabledata[i].response}</td><td>${tabledata[i].description}</td>`;
+
+			$("#tr_" + tabledata[i].id).html(str);
+                    //table.updateData(tabledata);
                 }
 
             });
