@@ -149,18 +149,31 @@
         ];
         let str = "";
 
-        for (var a in tabledata) {
-            str += `<tr id="tr_${tabledata[a].id}"><th scope = "row">${tabledata[a].id}</th><td>${tabledata[a].code}</td><td>${tabledata[a].be}</td><td>`;
+        google.charts.load('current', { packages: ['corechart'] }).then(function () {
+            var query = new google.visualization.Query('https://spreadsheets.google.com/tq?tqx=out:html&tq=SELECT+B,D&key=1epBB34EvpDy1jFoTnciS4SLDxXEcPscAe9enkE6z70A&gid=0');
+            query.send(function (response) {
+                var dataTable = response.getDataTable();
+                var jsonData = dataTable.toJSON();
+                jsonData = JSON.parse(jsonData);
+                for (var i = 0; i < jsonData.rows.length; i++) {
+                    var htmlData = jsonData.rows[i].c[0].v;
+                    var htmlDate = jsonData.rows[i].c[1].v;
+                    tabledata[i]['code'] = htmlData;
+                    if (htmlDate != "") {
+						$('#datediv span').text(htmlDate + " : ~" + (i + 1) + " 추가");
+                    }
 
-             /*   
-            if(tabledata[a].result === 0){
-                str += `<i class="fas fa-times"></i>`;
-            }else{
-                str += `<i class="fas fa-check"></i>`;
-            }
-            */
+            str += `<tr id="tr_${tabledata[a].id}"><th scope = "row">${tabledata[a].id}</th><td>${tabledata[a].code}</td><td>${tabledata[a].be}</td><td>`;
             str += `</td><td>${tabledata[a].response}</td><td>${tabledata[a].description}</td></tr >`;
-        }    
+                }
+
+            });
+        });
+	    
+        //for (var a in tabledata) {
+        //    str += `<tr id="tr_${tabledata[a].id}"><th scope = "row">${tabledata[a].id}</th><td>${tabledata[a].code}</td><td>${tabledata[a].be}</td><td>`;
+        //    str += `</td><td>${tabledata[a].response}</td><td>${tabledata[a].description}</td></tr >`;
+        //}    
 
         $("#t_body").html(str);        
 
@@ -217,35 +230,6 @@
             }
         }
 
-        google.charts.load('current', { packages: ['corechart'] }).then(function () {
-            var query = new google.visualization.Query('https://spreadsheets.google.com/tq?tqx=out:html&tq=SELECT+B,D&key=1epBB34EvpDy1jFoTnciS4SLDxXEcPscAe9enkE6z70A&gid=0');
-            query.send(function (response) {
-                var dataTable = response.getDataTable();
-                var jsonData = dataTable.toJSON();
-                jsonData = JSON.parse(jsonData);
-                for (var i = 0; i < jsonData.rows.length; i++) {
-                    var htmlData = jsonData.rows[i].c[0].v;
-                    var htmlDate = jsonData.rows[i].c[1].v;
-                    tabledata[i]['code'] = htmlData;
-                    if (htmlDate != "") {
-						$('#datediv span').text(htmlDate + " : ~" + (i + 1) + " 추가");
-                    }
-			let str = `<th scope = "row">${tabledata[i].id}</th><td>${tabledata[i].code}</td><td>${tabledata[i].be}</td><td>`;
-
-			if (tabledata[i].result === 0) {
-			    str += `<i class="fas fa-times"></i>`;
-			} else {
-			    str += `<i class="fas fa-check"></i>`;
-			}    
-
-			str += `</td><td>${tabledata[i].response}</td><td>${tabledata[i].description}</td>`;
-
-			$("#tr_" + tabledata[i].id).html(str);
-                    //table.updateData(tabledata);
-                }
-
-            });
-        });
     </script>
 </body>
 
